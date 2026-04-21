@@ -1,0 +1,1267 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Da Poeira das Estrelas ao Ser Humano</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --cor-destaque: #ffffff;
+  --cor-texto: #ffffff;
+  --cor-secundario: #bbbbbb;
+  --fundo: #0d0a04;
+  --fundo-card: rgba(255,255,255,0.05);
+  --borda: rgba(255,255,255,0.18);
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+
+html{scroll-behavior:smooth;font-size:16px;}
+
+body{
+  background-color:var(--fundo);
+  color:var(--cor-texto);
+  font-family:'EB Garamond',Georgia,serif;
+  font-size:clamp(1.15rem,2.5vw,1.35rem);
+  line-height:1.85;
+  overflow-x:hidden;
+}
+
+/* Stars background */
+body::before{
+  content:'';
+  position:fixed;
+  inset:0;
+  background-image:
+    radial-gradient(1px 1px at 10% 15%,rgba(255,255,255,0.6) 0%,transparent 100%),
+    radial-gradient(1px 1px at 25% 40%,rgba(255,255,255,0.4) 0%,transparent 100%),
+    radial-gradient(1.5px 1.5px at 40% 8%,rgba(255,255,255,0.5) 0%,transparent 100%),
+    radial-gradient(1px 1px at 55% 60%,rgba(255,255,255,0.35) 0%,transparent 100%),
+    radial-gradient(1px 1px at 70% 20%,rgba(255,255,255,0.5) 0%,transparent 100%),
+    radial-gradient(1.5px 1.5px at 80% 75%,rgba(255,255,255,0.4) 0%,transparent 100%),
+    radial-gradient(1px 1px at 90% 35%,rgba(255,255,255,0.3) 0%,transparent 100%),
+    radial-gradient(1px 1px at 15% 80%,rgba(255,255,255,0.45) 0%,transparent 100%),
+    radial-gradient(1px 1px at 35% 90%,rgba(255,255,255,0.3) 0%,transparent 100%),
+    radial-gradient(1.5px 1.5px at 62% 88%,rgba(255,255,255,0.5) 0%,transparent 100%),
+    radial-gradient(1px 1px at 48% 50%,rgba(255,255,255,0.25) 0%,transparent 100%),
+    radial-gradient(1px 1px at 5% 55%,rgba(255,255,255,0.4) 0%,transparent 100%),
+    radial-gradient(2px 2px at 92% 10%,rgba(255,255,255,0.6) 0%,transparent 100%),
+    radial-gradient(1px 1px at 75% 50%,rgba(255,255,255,0.3) 0%,transparent 100%),
+    radial-gradient(1px 1px at 30% 65%,rgba(255,255,255,0.35) 0%,transparent 100%);
+  pointer-events:none;
+  z-index:0;
+}
+
+/* Progress bar */
+#progressBar{
+  position:fixed;
+  top:0;left:0;
+  height:2px;
+  width:0%;
+  background:linear-gradient(90deg,rgba(255,255,255,0.3),rgba(255,255,255,0.9),rgba(255,255,255,0.3));
+  z-index:1000;
+  transition:width 0.1s linear;
+}
+
+/* ===== HERO ===== */
+#hero{
+  position:relative;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:2rem 1.5rem 5rem;
+  z-index:1;
+}
+
+.hero-symbol{
+  font-size:clamp(4rem,10vw,7rem);
+  display:block;
+  margin-bottom:1.5rem;
+  animation:flutuacao 4s ease-in-out infinite;
+}
+
+@keyframes flutuacao{
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-18px);}
+}
+
+.hero-categoria{
+  font-family:'Cinzel',serif;
+  font-size:clamp(0.65rem,1.5vw,0.8rem);
+  letter-spacing:0.35em;
+  text-transform:uppercase;
+  color:var(--cor-secundario);
+  margin-bottom:1.2rem;
+  opacity:0;
+  animation:fadeInUp 0.8s ease 0.3s forwards;
+}
+
+#hero h1{
+  font-family:'Cinzel Decorative',serif;
+  font-size:clamp(1.8rem,5vw,3.8rem);
+  font-weight:700;
+  line-height:1.2;
+  max-width:820px;
+  margin-bottom:1.2rem;
+  text-shadow:0 0 60px rgba(255,255,255,0.1);
+  opacity:0;
+  animation:fadeInUp 0.8s ease 0.5s forwards;
+}
+
+.hero-subtitulo{
+  font-family:'EB Garamond',serif;
+  font-style:italic;
+  font-size:clamp(1rem,2.2vw,1.25rem);
+  color:var(--cor-secundario);
+  max-width:600px;
+  margin-bottom:1.8rem;
+  opacity:0;
+  animation:fadeInUp 0.8s ease 0.7s forwards;
+}
+
+.hero-autor{
+  font-family:'Cinzel',serif;
+  font-size:clamp(0.75rem,1.5vw,0.9rem);
+  letter-spacing:0.2em;
+  color:rgba(255,255,255,0.5);
+  opacity:0;
+  animation:fadeInUp 0.8s ease 0.9s forwards;
+}
+
+.hero-seta{
+  position:absolute;
+  bottom:2.5rem;
+  left:50%;
+  transform:translateX(-50%);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:4px;
+  opacity:0;
+  animation:setaAppear 1s ease 1.4s forwards;
+}
+
+.hero-seta span{
+  display:block;
+  width:1px;
+  height:28px;
+  background:rgba(255,255,255,0.4);
+  transform-origin:top;
+  animation:setaPulse 1.8s ease-in-out infinite;
+}
+
+@keyframes setaPulse{
+  0%,100%{opacity:0.3;transform:scaleY(0.6);}
+  50%{opacity:0.8;transform:scaleY(1);}
+}
+
+@keyframes setaAppear{
+  to{opacity:1;}
+}
+
+@keyframes fadeInUp{
+  from{opacity:0;transform:translateY(24px);}
+  to{opacity:1;transform:translateY(0);}
+}
+
+/* ===== NAV ===== */
+#mainNav{
+  position:sticky;
+  top:0;
+  z-index:100;
+  background:rgba(13,10,4,0.92);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--borda);
+  padding:0 1rem;
+  overflow-x:auto;
+  scrollbar-width:none;
+  white-space:nowrap;
+}
+
+#mainNav::-webkit-scrollbar{display:none;}
+
+.nav-inner{
+  display:inline-flex;
+  gap:0;
+  min-width:100%;
+  justify-content:center;
+}
+
+@media(max-width:700px){
+  .nav-inner{justify-content:flex-start;}
+}
+
+.nav-btn{
+  font-family:'Cinzel',serif;
+  font-size:0.68rem;
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  color:rgba(255,255,255,0.45);
+  background:none;
+  border:none;
+  padding:1rem 1.1rem;
+  cursor:pointer;
+  transition:color 0.25s;
+  white-space:nowrap;
+  position:relative;
+}
+
+.nav-btn::after{
+  content:'';
+  position:absolute;
+  bottom:0;left:50%;right:50%;
+  height:2px;
+  background:#fff;
+  transition:left 0.25s,right 0.25s;
+}
+
+.nav-btn:hover{color:rgba(255,255,255,0.8);}
+.nav-btn.ativo{color:#fff;}
+.nav-btn.ativo::after{left:10%;right:10%;}
+
+/* ===== SECTIONS ===== */
+.section{
+  position:relative;
+  max-width:860px;
+  margin:0 auto;
+  padding:5rem 1.5rem;
+  z-index:1;
+  opacity:0;
+  transform:translateY(36px);
+  transition:opacity 0.7s ease,transform 0.7s ease;
+}
+
+.section.visivel{
+  opacity:1;
+  transform:translateY(0);
+}
+
+.section-label{
+  font-family:'Cinzel',serif;
+  font-size:0.65rem;
+  letter-spacing:0.4em;
+  text-transform:uppercase;
+  color:rgba(255,255,255,0.35);
+  margin-bottom:0.8rem;
+}
+
+.section h2{
+  font-family:'Cinzel Decorative',serif;
+  font-size:clamp(1.4rem,3.5vw,2.4rem);
+  font-weight:700;
+  line-height:1.25;
+  margin-bottom:1.8rem;
+}
+
+.section h3{
+  font-family:'Cinzel',serif;
+  font-size:clamp(0.9rem,2vw,1.1rem);
+  font-weight:600;
+  letter-spacing:0.08em;
+  margin:2.5rem 0 1rem;
+  color:rgba(255,255,255,0.85);
+}
+
+.section p{
+  margin-bottom:1.2rem;
+  color:rgba(255,255,255,0.88);
+}
+
+/* Divisores */
+.divisor{
+  text-align:center;
+  padding:1.5rem 0;
+  position:relative;
+  z-index:1;
+}
+
+.divisor::before{
+  content:'';
+  position:absolute;
+  top:50%;left:10%;right:10%;
+  height:1px;
+  background:var(--borda);
+}
+
+.divisor-glifo{
+  position:relative;
+  display:inline-block;
+  background:var(--fundo);
+  padding:0 1.2rem;
+  font-size:1.1rem;
+  opacity:0.4;
+}
+
+/* Citação */
+.citacao{
+  border-left:2px solid rgba(255,255,255,0.6);
+  padding:1.2rem 1.5rem 1.2rem 2rem;
+  margin:2rem 0;
+  position:relative;
+  background:rgba(255,255,255,0.03);
+}
+
+.citacao::before{
+  content:'\201C';
+  position:absolute;
+  top:-0.5rem;left:0.8rem;
+  font-family:'EB Garamond',serif;
+  font-size:4rem;
+  line-height:1;
+  color:rgba(255,255,255,0.15);
+}
+
+.citacao p{
+  font-style:italic;
+  font-size:clamp(1.05rem,2.2vw,1.2rem);
+  color:rgba(255,255,255,0.9);
+  margin-bottom:0.6rem;
+}
+
+.citacao .ref{
+  font-family:'Cinzel',serif;
+  font-size:0.72rem;
+  letter-spacing:0.18em;
+  color:rgba(255,255,255,0.45);
+  text-transform:uppercase;
+}
+
+/* Cards */
+.cards-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:1rem;
+  margin:1.5rem 0;
+}
+
+.card{
+  background:var(--fundo-card);
+  border:1px solid var(--borda);
+  padding:1.4rem 1.2rem;
+  transition:transform 0.25s,border-color 0.25s,box-shadow 0.25s;
+  cursor:default;
+}
+
+.card:hover{
+  transform:translateY(-4px);
+  border-color:rgba(255,255,255,0.45);
+  box-shadow:0 12px 32px rgba(0,0,0,0.5);
+}
+
+.card-icon{font-size:1.8rem;margin-bottom:0.8rem;display:block;}
+
+.card-titulo{
+  font-family:'Cinzel',serif;
+  font-size:0.8rem;
+  letter-spacing:0.1em;
+  font-weight:600;
+  margin-bottom:0.5rem;
+  color:#fff;
+}
+
+.card p{font-size:0.95rem;color:rgba(255,255,255,0.7);margin:0;}
+
+/* Tabela */
+.tabela-wrapper{overflow-x:auto;margin:1.5rem 0;}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  font-size:clamp(0.85rem,1.8vw,1rem);
+}
+
+th{
+  font-family:'Cinzel',serif;
+  font-size:0.7rem;
+  letter-spacing:0.15em;
+  text-transform:uppercase;
+  padding:0.8rem 1rem;
+  border-bottom:1px solid rgba(255,255,255,0.35);
+  text-align:left;
+  color:rgba(255,255,255,0.6);
+}
+
+td{
+  padding:0.75rem 1rem;
+  border-bottom:1px solid rgba(255,255,255,0.07);
+  color:rgba(255,255,255,0.82);
+  vertical-align:top;
+}
+
+tr:hover td{background:rgba(255,255,255,0.04);}
+
+/* Acordeão */
+.acordeao{margin:1.5rem 0;}
+
+.acordeao-item{
+  border:1px solid var(--borda);
+  margin-bottom:0.5rem;
+  transition:border-color 0.25s;
+}
+
+.acordeao-item.aberto{border-color:rgba(255,255,255,0.4);}
+
+.acordeao-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:1rem 1.2rem;
+  cursor:pointer;
+  font-family:'Cinzel',serif;
+  font-size:0.82rem;
+  letter-spacing:0.08em;
+  color:rgba(255,255,255,0.8);
+  user-select:none;
+  gap:1rem;
+}
+
+.acordeao-seta{
+  transition:transform 0.3s;
+  flex-shrink:0;
+  opacity:0.5;
+  font-size:0.7rem;
+}
+
+.acordeao-item.aberto .acordeao-seta{transform:rotate(180deg);}
+
+.acordeao-corpo{
+  max-height:0;
+  overflow:hidden;
+  transition:max-height 0.4s ease;
+}
+
+.acordeao-corpo-inner{
+  padding:0 1.2rem 1rem;
+  color:rgba(255,255,255,0.75);
+  font-size:0.98rem;
+  line-height:1.8;
+}
+
+/* Passos */
+.passos{list-style:none;margin:1.5rem 0;}
+
+.passo{
+  display:flex;
+  gap:1.2rem;
+  align-items:flex-start;
+  margin-bottom:1.4rem;
+  opacity:0;
+  transform:translateX(-20px);
+  transition:opacity 0.5s ease,transform 0.5s ease;
+}
+
+.passo.visivel{opacity:1;transform:translateX(0);}
+
+.passo-num{
+  flex-shrink:0;
+  width:2.2rem;height:2.2rem;
+  border:1px solid rgba(255,255,255,0.4);
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Cinzel',serif;
+  font-size:0.75rem;
+  color:rgba(255,255,255,0.6);
+}
+
+.passo-texto{font-size:1rem;color:rgba(255,255,255,0.82);}
+.passo-texto strong{font-family:'Cinzel',serif;font-size:0.82rem;letter-spacing:0.06em;display:block;color:#fff;margin-bottom:0.25rem;}
+
+/* Implicações */
+.implicacoes{list-style:none;margin:1.5rem 0;}
+
+.implicacao{
+  display:flex;
+  gap:1rem;
+  align-items:flex-start;
+  margin-bottom:1.2rem;
+  padding-bottom:1.2rem;
+  border-bottom:1px solid rgba(255,255,255,0.06);
+}
+
+.implicacao:last-child{border-bottom:none;}
+
+.impl-ponto{
+  flex-shrink:0;
+  width:8px;height:8px;
+  border-radius:50%;
+  background:#fff;
+  box-shadow:0 0 8px rgba(255,255,255,0.6);
+  margin-top:0.55rem;
+}
+
+.impl-titulo{
+  font-family:'Cinzel',serif;
+  font-size:0.75rem;
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  display:block;
+  margin-bottom:0.3rem;
+  color:#fff;
+}
+
+.impl-texto{font-size:1rem;color:rgba(255,255,255,0.78);}
+
+/* Tags / referências */
+.tags{display:flex;flex-wrap:wrap;gap:0.5rem;margin:1.5rem 0;}
+
+.tag{
+  font-family:'Cinzel',serif;
+  font-size:0.65rem;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  padding:0.35rem 0.8rem;
+  border:1px solid var(--borda);
+  color:rgba(255,255,255,0.55);
+  cursor:pointer;
+  position:relative;
+  transition:color 0.2s,border-color 0.2s,background 0.2s;
+  background:transparent;
+}
+
+.tag:hover{color:#fff;border-color:rgba(255,255,255,0.5);}
+.tag.flash{background:rgba(255,255,255,0.15);}
+
+.tag-tooltip{
+  position:fixed;
+  background:rgba(13,10,4,0.97);
+  border:1px solid rgba(255,255,255,0.25);
+  padding:0.6rem 0.9rem;
+  font-family:'EB Garamond',serif;
+  font-size:0.88rem;
+  font-style:italic;
+  color:rgba(255,255,255,0.8);
+  max-width:280px;
+  pointer-events:none;
+  opacity:0;
+  transition:opacity 0.2s;
+  z-index:500;
+  line-height:1.5;
+}
+
+.tag-tooltip.visivel{opacity:1;}
+
+/* Rodapé */
+footer{
+  text-align:center;
+  padding:4rem 1.5rem 3rem;
+  position:relative;
+  z-index:1;
+  border-top:1px solid var(--borda);
+}
+
+.footer-symbol{font-size:2rem;display:block;margin-bottom:1rem;opacity:0.5;}
+
+.footer-nome{
+  font-family:'Cinzel Decorative',serif;
+  font-size:clamp(0.9rem,2vw,1.1rem);
+  margin-bottom:0.5rem;
+  color:rgba(255,255,255,0.7);
+}
+
+.footer-nota{
+  font-family:'EB Garamond',serif;
+  font-style:italic;
+  font-size:0.9rem;
+  color:rgba(255,255,255,0.35);
+}
+
+.footer-autor-bloco{
+  margin-top:2rem;
+  padding-top:1.5rem;
+  border-top:1px solid var(--borda);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:0.3rem;
+}
+
+.footer-autor-nome{
+  font-family:'Cinzel Decorative',serif;
+  font-size:clamp(0.9rem,2vw,1.05rem);
+  color:rgba(255,255,255,0.75);
+  letter-spacing:0.05em;
+}
+
+.footer-autor-local{
+  font-family:'Cinzel',serif;
+  font-size:0.72rem;
+  letter-spacing:0.25em;
+  text-transform:uppercase;
+  color:rgba(255,255,255,0.35);
+}
+
+.footer-autor-link{
+  font-family:'Cinzel',serif;
+  font-size:0.75rem;
+  letter-spacing:0.12em;
+  color:rgba(255,255,255,0.45);
+  text-decoration:none;
+  border-bottom:1px solid rgba(255,255,255,0.2);
+  padding-bottom:1px;
+  transition:color 0.2s,border-color 0.2s;
+  margin-top:0.2rem;
+}
+
+.footer-autor-link:hover{
+  color:rgba(255,255,255,0.85);
+  border-color:rgba(255,255,255,0.5);
+}
+
+/* Voltar ao topo */
+#backTop{
+  position:fixed;
+  bottom:2rem;right:1.5rem;
+  width:2.8rem;height:2.8rem;
+  border-radius:50%;
+  border:1px solid rgba(255,255,255,0.3);
+  background:rgba(13,10,4,0.85);
+  color:rgba(255,255,255,0.6);
+  font-size:1rem;
+  cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity 0.3s,border-color 0.2s,color 0.2s;
+  z-index:200;
+}
+
+#backTop.visivel{opacity:1;pointer-events:all;}
+#backTop:hover{border-color:rgba(255,255,255,0.7);color:#fff;}
+
+/* Linha do tempo */
+.timeline{position:relative;padding-left:2rem;margin:1.5rem 0;}
+.timeline::before{content:'';position:absolute;left:0;top:0;bottom:0;width:1px;background:var(--borda);}
+
+.timeline-item{
+  position:relative;
+  margin-bottom:2rem;
+  opacity:0;
+  transform:translateX(-16px);
+  transition:opacity 0.5s ease,transform 0.5s ease;
+}
+
+.timeline-item.visivel{opacity:1;transform:translateX(0);}
+
+.timeline-item::before{
+  content:'';
+  position:absolute;
+  left:-2rem;
+  top:0.55rem;
+  width:7px;height:7px;
+  border-radius:50%;
+  background:#fff;
+  box-shadow:0 0 8px rgba(255,255,255,0.5);
+  transform:translateX(-3px);
+}
+
+.tl-ano{
+  font-family:'Cinzel',serif;
+  font-size:0.72rem;
+  letter-spacing:0.18em;
+  color:rgba(255,255,255,0.45);
+  margin-bottom:0.25rem;
+}
+
+.tl-titulo{
+  font-family:'Cinzel',serif;
+  font-size:0.85rem;
+  color:#fff;
+  margin-bottom:0.2rem;
+}
+
+.tl-autor{
+  font-family:'EB Garamond',serif;
+  font-style:italic;
+  font-size:0.95rem;
+  color:rgba(255,255,255,0.55);
+}
+
+/* Destaque inline */
+em.destaque{
+  font-style:normal;
+  color:#fff;
+  border-bottom:1px solid rgba(255,255,255,0.3);
+}
+</style>
+</head>
+<body>
+
+<div id="progressBar"></div>
+
+<!-- HERO -->
+<section id="hero">
+  <span class="hero-symbol">✦</span>
+  <p class="hero-categoria">Ciência · Fé · Filosofia</p>
+  <h1>Da Poeira das Estrelas ao Ser Humano</h1>
+  <p class="hero-subtitulo">Uma reflexão a partir da física nuclear, da Bíblia e da filosofia da criação</p>
+  <p class="hero-autor">Artigo elaborado em diálogo com a física de Richard Feynman</p>
+  <div class="hero-seta"><span></span></div>
+</section>
+
+<!-- NAV -->
+<nav id="mainNav" role="navigation" aria-label="Navegação principal">
+  <div class="nav-inner">
+    <button class="nav-btn" onclick="irPara('introducao')" data-target="0">Introdução</button>
+    <button class="nav-btn" onclick="irPara('parte1')" data-target="1">A Fábrica</button>
+    <button class="nav-btn" onclick="irPara('parte2')" data-target="2">A Supernova</button>
+    <button class="nav-btn" onclick="irPara('parte3')" data-target="3">A Jornada</button>
+    <button class="nav-btn" onclick="irPara('parte4')" data-target="4">A Fé</button>
+    <button class="nav-btn" onclick="irPara('parte5')" data-target="5">Ciência &amp; Fé</button>
+    <button class="nav-btn" onclick="irPara('parte6')" data-target="6">O Propósito</button>
+    <button class="nav-btn" onclick="irPara('conclusao')" data-target="7">Conclusão</button>
+    <button class="nav-btn" onclick="irPara('timeline')" data-target="8">Cronologia</button>
+  </div>
+</nav>
+
+<!-- INTRODUÇÃO -->
+<div class="divisor"><span class="divisor-glifo">◆</span></div>
+
+<section class="section" id="introducao" data-nav="0">
+  <p class="section-label">Ponto de Partida</p>
+  <h2>Introdução</h2>
+
+  <p>Neste exato momento, o ferro que corre nas suas veias, o cálcio que forma seus ossos, o oxigênio que acabou de entrar nos seus pulmões — tudo isso só existe porque algo precisou morrer da forma mais violenta que a física é capaz de descrever.</p>
+
+  <p>Esta é uma das revelações mais perturbadoras e ao mesmo tempo mais belas da ciência moderna: cada ser humano é literalmente feito de <em class="destaque">poeira de estrelas mortas</em>. Mas essa afirmação, por si só, não responde tudo.</p>
+
+  <div class="cards-grid">
+    <div class="card">
+      <span class="card-icon">🔭</span>
+      <p class="card-titulo">A Ciência nos diz</p>
+      <p>O <strong>como</strong> — o mecanismo físico por trás de cada átomo do seu corpo.</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">✝️</span>
+      <p class="card-titulo">A Fé nos diz</p>
+      <p>O <strong>quem</strong> — o agente que ordenou o processo e lhe deu origem.</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">💫</span>
+      <p class="card-titulo">A Filosofia pergunta</p>
+      <p>O <strong>para quê</strong> — o propósito que nenhum telescópio pode revelar.</p>
+    </div>
+  </div>
+
+  <p>Este artigo percorre as três dimensões dessa questão — do interior das estrelas ao interior das células, passando pelo testemunho bíblico e chegando à pergunta mais profunda de todas: qual o objetivo da existência humana?</p>
+</section>
+
+<div class="divisor"><span class="divisor-glifo">✦</span></div>
+
+<!-- PARTE 1 -->
+<section class="section" id="parte1" data-nav="1">
+  <p class="section-label">Parte I</p>
+  <h2>A Fábrica Cósmica</h2>
+
+  <h3>1.1 — O que é realmente uma estrela</h3>
+
+  <p>A maioria das pessoas olha para o céu à noite e vê pontinhos de luz bonitos e distantes. Richard Feynman — físico norte-americano, Prêmio Nobel de Física em 1965 e considerado por muitos o maior físico do século XX — olhava para o céu e via algo completamente diferente: fornalhas nucleares gigantescas operando em condições tão extremas que a mente humana dificilmente consegue processar.</p>
+
+  <div class="cards-grid">
+    <div class="card">
+      <span class="card-icon">☀️</span>
+      <p class="card-titulo">Escala</p>
+      <p>O Sol tem 1.300.000 vezes o volume da Terra.</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">🌡️</span>
+      <p class="card-titulo">Temperatura</p>
+      <p>No núcleo: 15 milhões de graus Celsius.</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">⚡</span>
+      <p class="card-titulo">Pressão</p>
+      <p>250 bilhões de atmosferas terrestres comprimindo a matéria.</p>
+    </div>
+  </div>
+
+  <h3>1.2 — A fusão nuclear e a fabricação dos elementos (1938–1957)</h3>
+
+  <p>Em 1938, o físico Hans Bethe descreveu matematicamente como as estrelas produzem energia através da fusão nuclear — trabalho que lhe renderia o Nobel em 1967. No núcleo das estrelas, átomos de hidrogênio são esmagados uns contra os outros com tanta força que vencem a repulsão eletromagnética, fundindo-se e criando hélio. Nesse processo, uma pequena quantidade de massa é convertida em energia pura, conforme a equação <em class="destaque">E = mc²</em> de Einstein (1905).</p>
+
+  <p>Em 1957, o estudo <em class="destaque">B²FH</em> — publicado por Margaret Burbidge, Geoffrey Burbidge, William Fowler e Fred Hoyle — demonstrou como estrelas massivas fabricam elementos progressivamente mais pesados:</p>
+
+  <div class="tabela-wrapper">
+    <table>
+      <thead><tr><th>Processo de Fusão</th><th>Elemento Produzido</th></tr></thead>
+      <tbody>
+        <tr><td>Hidrogênio → Hélio</td><td>Hélio (combustível intermediário)</td></tr>
+        <tr><td>Hélio → Carbono</td><td>Carbono — base de toda molécula orgânica</td></tr>
+        <tr><td>Carbono → Oxigênio</td><td>Oxigênio — 65% da massa do corpo humano</td></tr>
+        <tr><td>Oxigênio → Silício/Enxofre</td><td>Elementos estruturais da Terra</td></tr>
+        <tr><td>Silício → Ferro</td><td>Ferro — presente no sangue humano</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="citacao">
+    <p>O ferro é o elemento mais estável que existe. Fundir ferro não libera energia — ao contrário, consome energia. Quando o núcleo de uma estrela se transforma em ferro, a fusão para completamente.</p>
+    <span class="ref">O momento em que o destino da estrela muda para sempre</span>
+  </div>
+</section>
+
+<div class="divisor"><span class="divisor-glifo">◆</span></div>
+
+<!-- PARTE 2 -->
+<section class="section" id="parte2" data-nav="2">
+  <p class="section-label">Parte II</p>
+  <h2>A Morte Mais Violenta do Universo</h2>
+
+  <h3>2.1 — O colapso</h3>
+
+  <ul class="passos" id="passos-colapso">
+    <li class="passo">
+      <div class="passo-num">1</div>
+      <div class="passo-texto"><strong>A fusão para</strong>Sem energia nuclear para equilibrar a gravidade, o núcleo de ferro colapsa em menos de um segundo — menos de um único segundo para destruir algo construído em milhões de anos.</div>
+    </li>
+    <li class="passo">
+      <div class="passo-num">2</div>
+      <div class="passo-texto"><strong>Velocidade extrema</strong>O núcleo, com aproximadamente o tamanho da Terra, é esmagado até ficar com apenas 20 km de diâmetro, a uma velocidade de 70.000 km/s — quase ¼ da velocidade da luz.</div>
+    </li>
+    <li class="passo">
+      <div class="passo-num">3</div>
+      <div class="passo-texto"><strong>Nasce a estrela de nêutrons</strong>Os elétrons são forçados a se fundir com os prótons. O que resta é uma esfera tão densa que uma colher de chá dela pesaria 6 bilhões de toneladas na Terra.</div>
+    </li>
+  </ul>
+
+  <h3>2.2 — A explosão e a forja dos elementos pesados</h3>
+
+  <p>As camadas externas da estrela ricocheteiam no núcleo rígido de nêutrons com energia descomunal. O resultado é uma <em class="destaque">supernova</em> — em apenas 10 segundos, ela libera mais energia do que o Sol liberará em toda a sua existência de 10 bilhões de anos.</p>
+
+  <p>É nessa explosão que nascem os elementos mais pesados que o ferro — aqueles que a estrela não conseguiu fabricar enquanto estava viva:</p>
+
+  <div class="tabela-wrapper">
+    <table>
+      <thead><tr><th>Elemento</th><th>Função no Corpo Humano</th></tr></thead>
+      <tbody>
+        <tr><td>Cobre</td><td>Transmissão de sinais no sistema nervoso</td></tr>
+        <tr><td>Zinco</td><td>Presente em centenas de enzimas</td></tr>
+        <tr><td>Iodo</td><td>Essencial para o funcionamento da tireoide</td></tr>
+        <tr><td>Cobalto</td><td>Componente da vitamina B12</td></tr>
+        <tr><td>Ouro / Prata / Urânio</td><td>Forjados no caos absoluto da supernova</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>Todos esses elementos só existem porque uma estrela morreu da forma mais brutal possível. Após a explosão, são lançados no espaço a milhares de quilômetros por segundo, formando nuvens gigantescas — as <em class="destaque">nebulosas</em>.</p>
+</section>
+
+<div class="divisor"><span class="divisor-glifo">✦</span></div>
+
+<!-- PARTE 3 -->
+<section class="section" id="parte3" data-nav="3">
+  <p class="section-label">Parte III</p>
+  <h2>Da Nebulosa ao Ser Humano</h2>
+
+  <h3>3.1 — A nuvem primordial</h3>
+
+  <p>Os átomos dispersos pelas supernovas vagam durante milhões de anos pelo espaço interestelar. Feynman chamava as nebulosas de <em class="destaque">"cemitérios e berçários ao mesmo tempo"</em>: feitas de restos de estrelas mortas, mas contendo as sementes de tudo que ainda vai existir.</p>
+
+  <p>Há cerca de 4,6 bilhões de anos — datação estabelecida pela geocronologia moderna a partir de meteoritos e rochas lunares — uma dessas nuvens começou a colapsar sob a própria gravidade. O centro virou o Sol. O material restante formou os planetas. A Terra se formou desse material residual: literalmente construída de cinzas estelares.</p>
+
+  <h3>3.2 — O caminho dos átomos até você</h3>
+
+  <p>Os átomos estelares integraram o ciclo da natureza: o solo, os oceanos, a atmosfera. Com o surgimento da vida, entraram nas cadeias alimentares. Cada vez que você bebe água, respira ar ou come um alimento, está incorporando ao seu corpo átomos que já fizeram parte de estrelas, de oceanos primitivos, de outros organismos ao longo de bilhões de anos.</p>
+
+  <p>Durante a gestação, a mãe transfere esses átomos ao embrião através do sangue e da placenta. O embrião os incorpora e reorganiza conforme as instruções de um sistema extraordinariamente preciso: o DNA.</p>
+
+  <h3>3.3 — O DNA: o software da criação</h3>
+
+  <div class="acordeao">
+    <div class="acordeao-item" id="ac1">
+      <div class="acordeao-header" onclick="toggleAcordeao('ac1')">
+        <span>Hardware vs. Software — a distinção fundamental</span>
+        <span class="acordeao-seta">▼</span>
+      </div>
+      <div class="acordeao-corpo">
+        <div class="acordeao-corpo-inner">
+          Os átomos são o <strong>hardware</strong> — o material bruto, velho como o universo. O DNA é o <strong>software</strong> — as instruções que determinam como organizar esses átomos para formar cada criatura específica. Sem o hardware, nada se constrói. Sem o software, o hardware é apenas matéria dispersa sem função.
+        </div>
+      </div>
+    </div>
+    <div class="acordeao-item" id="ac2">
+      <div class="acordeao-header" onclick="toggleAcordeao('ac2')">
+        <span>A observação de Feynman sobre os átomos da vida</span>
+        <span class="acordeao-seta">▼</span>
+      </div>
+      <div class="acordeao-corpo">
+        <div class="acordeao-corpo-inner">
+          "Não existe nenhum átomo especial da vida. Os mesmos átomos que formam uma rocha podem formar uma célula. A diferença não está nos ingredientes — está na organização, na receita, no código." — A receita levou bilhões de anos para ser escrita. Os ingredientes foram todos fabricados em fornalhas estelares.
+        </div>
+      </div>
+    </div>
+    <div class="acordeao-item" id="ac3">
+      <div class="acordeao-header" onclick="toggleAcordeao('ac3')">
+        <span>Como o DNA dirige a formação do embrião</span>
+        <span class="acordeao-seta">▼</span>
+      </div>
+      <div class="acordeao-corpo">
+        <div class="acordeao-corpo-inner">
+          O DNA funciona como uma planta arquitetônica: os átomos não "sabem" que estão formando um ser humano — eles obedecem às leis da química e da física. O que dirige o processo é a informação contida no DNA, que liga e desliga genes conforme o contexto, especializando células em neurônios, músculo, osso. É como tijolos numa obra: os tijolos não constroem a casa, a planta é que organiza onde cada tijolo vai.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divisor"><span class="divisor-glifo">◆</span></div>
+
+<!-- PARTE 4 -->
+<section class="section" id="parte4" data-nav="4">
+  <p class="section-label">Parte IV</p>
+  <h2>A Perspectiva da Fé</h2>
+
+  <div class="citacao">
+    <p>Pela fé entendemos que os mundos foram criados pela palavra de Deus, de modo que o que se vê não foi feito do que é visível.</p>
+    <span class="ref">Hebreus 11:3</span>
+  </div>
+
+  <h3>4.2 — Uma leitura estruturada</h3>
+
+  <p>A segunda parte do versículo — <em class="destaque">"o que se vê não foi feito do que é visível"</em> — é uma afirmação fisicamente notável: toda a matéria visível foi originada a partir de algo invisível. Considerando que os átomos são invisíveis a olho nu e são a base estrutural de tudo que existe no universo visível, o versículo comporta uma leitura que se harmoniza surpreendentemente com a física moderna.</p>
+
+  <div class="tabela-wrapper">
+    <table>
+      <thead><tr><th>Elemento do Versículo</th><th>Texto Bíblico</th><th>Correspondência</th></tr></thead>
+      <tbody>
+        <tr><td>Agente Criador</td><td>"os mundos foram criados"</td><td>Deus como origem primária</td></tr>
+        <tr><td>Instrumento</td><td>"pela palavra de Deus"</td><td>A palavra como força ordenadora</td></tr>
+        <tr><td>Material</td><td>"o que se vê não foi feito do que é visível"</td><td>O invisível = átomos / partículas subatômicas</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>É importante registrar que a palavra grega usada no original — <em class="destaque">pragmata</em> — refere-se a "coisas" ou "realidades", não especificamente a partículas materiais. O autor de Hebreus não tinha o conceito moderno de átomo. Isso não invalida a leitura, mas indica que o texto <em>comporta</em> essa interpretação sem necessariamente exigi-la. O que ela faz é acomodar o conhecimento científico contemporâneo dentro de um marco teológico coerente.</p>
+</section>
+
+<div class="divisor"><span class="divisor-glifo">✦</span></div>
+
+<!-- PARTE 5 -->
+<section class="section" id="parte5" data-nav="5">
+  <p class="section-label">Parte V</p>
+  <h2>Ciência e Fé: Dois Níveis de Explicação</h2>
+
+  <h3>5.1 — O que cada uma responde</h3>
+
+  <p>Um dos maiores equívocos dos debates modernos é tratar ciência e fé como concorrentes que respondem à mesma pergunta. Na realidade, elas respondem perguntas diferentes — e ambas são necessárias para uma compreensão plena da existência.</p>
+
+  <div class="tabela-wrapper">
+    <table>
+      <thead><tr><th>Pergunta</th><th>A Ciência</th><th>A Fé</th></tr></thead>
+      <tbody>
+        <tr><td>Como o universo funciona?</td><td>Sim — com precisão</td><td>Não é seu domínio primário</td></tr>
+        <tr><td>Quem criou?</td><td>Não responde</td><td>Sim — Deus</td></tr>
+        <tr><td>Com que material?</td><td>Sim — átomos, partículas</td><td>Sim — o invisível (Hb 11:3)</td></tr>
+        <tr><td>Para quê existe?</td><td>Não responde</td><td>Sim — relacionamento em amor</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>5.2 — A analogia do bolo da vovó</h3>
+
+  <ul class="implicacoes">
+    <li class="implicacao">
+      <div class="impl-ponto"></div>
+      <div>
+        <span class="impl-titulo">O que a ciência pode fazer</span>
+        <span class="impl-texto">Analisar todos os ingredientes do bolo de cenoura, descrever as reações químicas do cozimento, reproduzir a receita com precisão e até aprimorá-la.</span>
+      </div>
+    </li>
+    <li class="implicacao">
+      <div class="impl-ponto"></div>
+      <div>
+        <span class="impl-titulo">O que a ciência jamais responderá</span>
+        <span class="impl-texto">"Por que a vovó fez o bolo?" Somente a vovó pode responder. E a resposta é simples: porque ama o neto que está de aniversário.</span>
+      </div>
+    </li>
+    <li class="implicacao">
+      <div class="impl-ponto"></div>
+      <div>
+        <span class="impl-titulo">Aplicando ao universo</span>
+        <span class="impl-texto">A ciência descreve como os átomos foram forjados nas estrelas, como se dispersaram pelo cosmos, como o DNA os arranjou em seres vivos. A pergunta "para que tudo isso existe?" permanece além dos instrumentos científicos.</span>
+      </div>
+    </li>
+  </ul>
+
+  <div class="tabela-wrapper">
+    <table>
+      <thead><tr><th>O Bolo</th><th>O Universo</th></tr></thead>
+      <tbody>
+        <tr><td>Ingredientes analisados pela ciência</td><td>Átomos estelares descritos pela física</td></tr>
+        <tr><td>Receita reproduzível</td><td>Leis da física e do DNA</td></tr>
+        <tr><td>Ciência explica o bolo</td><td>Ciência descreve a criação</td></tr>
+        <tr><td>Só a vovó sabe o porquê</td><td>Só o Criador conhece o propósito</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<div class="divisor"><span class="divisor-glifo">◆</span></div>
+
+<!-- PARTE 6 -->
+<section class="section" id="parte6" data-nav="6">
+  <p class="section-label">Parte VI</p>
+  <h2>O Propósito: Relacionamento em Amor</h2>
+
+  <p>Se a ciência nos diz o <em class="destaque">como</em>, e a fé nos diz o <em class="destaque">quem</em>, a questão final é: <em class="destaque">para quê</em>? E aqui a resposta que emerge da tradição bíblica é ao mesmo tempo simples e profunda: <strong>relacionamento em amor</strong>.</p>
+
+  <p>Isso significa que o processo inteiro — estrelas morrendo em explosões cataclísmicas, átomos vagando por bilhões de anos pelo espaço interestelar, nuvens colapsando para formar sistemas solares, DNA acumulando bilhões de anos de informação — não seria um acidente sem destino, mas o caminho longo e elaborado para chegar a uma criatura capaz de amar e ser amada.</p>
+
+  <p>Feynman, sem declarar fé religiosa, chegou surpreendentemente perto dessa ideia quando afirmou que o mais extraordinário do universo não era a violência das explosões estelares, mas o fato de que a poeira estelar eventualmente se tornou algo que pensa, questiona e contempla sua própria origem.</p>
+
+  <p>A perspectiva da fé vai um passo além: esse algo não apenas pensa — ele <em class="destaque">ama e é amado</em>. E é exatamente para esse relacionamento que todo o processo foi direcionado.</p>
+
+  <div class="citacao">
+    <p>Pela fé entendemos que os mundos foram criados pela palavra de Deus.</p>
+    <span class="ref">Hebreus 11:3</span>
+  </div>
+</section>
+
+<div class="divisor"><span class="divisor-glifo">✦</span></div>
+
+<!-- CONCLUSÃO -->
+<section class="section" id="conclusao" data-nav="7">
+  <p class="section-label">Síntese Final</p>
+  <h2>Conclusão</h2>
+
+  <p>A jornada que os átomos percorrem — desde o interior de uma estrela massiva, passando pela violência de uma supernova, vagando pelo espaço interestelar por bilhões de anos, integrando a composição de um planeta, sendo absorvidos por organismos vivos e finalmente organizados pelo DNA em um ser humano — é uma das histórias mais extraordinárias que a ciência já contou.</p>
+
+  <p>Mas essa história tem camadas. A física descreve o mecanismo com precisão admirável. A Bíblia, em Hebreus 11:3, aponta para o agente — aquele que ordenou o invisível a se tornar visível. E a fé oferece a resposta que nenhum telescópio ou acelerador de partículas pode fornecer: o propósito de tudo isso é o <em class="destaque">relacionamento em amor</em>.</p>
+
+  <ul class="implicacoes">
+    <li class="implicacao">
+      <div class="impl-ponto"></div>
+      <div>
+        <span class="impl-titulo">Mais humilde</span>
+        <span class="impl-texto">Revela que a existência humana depende de processos que nenhum ser humano controla. Somos feitos de matéria forjada em mortes que precedem nossa existência por bilhões de anos.</span>
+      </div>
+    </li>
+    <li class="implicacao">
+      <div class="impl-ponto"></div>
+      <div>
+        <span class="impl-titulo">Mais grandiosa</span>
+        <span class="impl-texto">Cada pessoa é feita da mesma matéria que compõe as estrelas, os planetas e tudo que existe — e foi amada antes mesmo de existir.</span>
+      </div>
+    </li>
+    <li class="implicacao">
+      <div class="impl-ponto"></div>
+      <div>
+        <span class="impl-titulo">Conhecimento e maravilhamento</span>
+        <span class="impl-texto">Como Feynman dizia: conhecimento é o combustível do maravilhamento. Entender que cada átomo do próprio corpo foi forjado na morte violenta de uma estrela — e que isso foi parte de um projeto maior de amor — é carregar uma percepção da realidade simultaneamente mais humilde e mais grandiosa do que qualquer outra.</span>
+      </div>
+    </li>
+  </ul>
+
+  <p>Referências citadas neste artigo:</p>
+  <div class="tags">
+    <span class="tag" data-tooltip="E = mc² — 1905, Albert Einstein. Equivalência entre massa e energia, fundamento da física nuclear.">Einstein (1905)</span>
+    <span class="tag" data-tooltip="Hans Bethe, 1938. Descrição matemática da fusão nuclear estelar. Nobel de Física em 1967.">Bethe (1938)</span>
+    <span class="tag" data-tooltip="Estudo B²FH — Burbidge, Burbidge, Fowler e Hoyle, 1957. Nucleossíntese estelar: como as estrelas fabricam os elementos da tabela periódica.">B²FH (1957)</span>
+    <span class="tag" data-tooltip="Richard Feynman, Nobel de Física 1965. Suas aulas no Caltech popularizaram a nucleossíntese para o público geral.">Feynman (1965)</span>
+    <span class="tag" data-tooltip="Hebreus 11:3 — 'Pela fé entendemos que os mundos foram criados pela palavra de Deus, de modo que o que se vê não foi feito do que é visível.'">Hebreus 11:3</span>
+    <span class="tag" data-tooltip="Watson e Crick, 1953. Estrutura de dupla hélice do DNA — o 'software' que organiza os átomos estelares em seres vivos.">Watson & Crick (1953)</span>
+    <span class="tag" data-tooltip="Geocronologia moderna, séc. XX–XXI. Datação do Sistema Solar em 4,6 bilhões de anos a partir de meteoritos e rochas lunares.">Geocronologia</span>
+  </div>
+</section>
+
+<div class="divisor"><span class="divisor-glifo">◆</span></div>
+
+<!-- TIMELINE -->
+<section class="section" id="timeline" data-nav="8">
+  <p class="section-label">Linha do Tempo</p>
+  <h2>Descobertas Científicas Citadas</h2>
+
+  <div class="timeline" id="tl-lista">
+    <div class="timeline-item">
+      <p class="tl-ano">1905</p>
+      <p class="tl-titulo">E = mc² — Equivalência massa-energia</p>
+      <p class="tl-autor">Albert Einstein</p>
+    </div>
+    <div class="timeline-item">
+      <p class="tl-ano">1938</p>
+      <p class="tl-titulo">Descrição matemática da fusão nuclear estelar</p>
+      <p class="tl-autor">Hans Bethe</p>
+    </div>
+    <div class="timeline-item">
+      <p class="tl-ano">1953</p>
+      <p class="tl-titulo">Estrutura de dupla hélice do DNA</p>
+      <p class="tl-autor">Watson, Crick e colaboradores</p>
+    </div>
+    <div class="timeline-item">
+      <p class="tl-ano">1957</p>
+      <p class="tl-titulo">Nucleossíntese estelar — Estudo B²FH</p>
+      <p class="tl-autor">Burbidge, Burbidge, Fowler e Hoyle</p>
+    </div>
+    <div class="timeline-item">
+      <p class="tl-ano">1965</p>
+      <p class="tl-titulo">Prêmio Nobel de Física — Física quântica e eletrodinâmica</p>
+      <p class="tl-autor">Richard Feynman</p>
+    </div>
+    <div class="timeline-item">
+      <p class="tl-ano">1967</p>
+      <p class="tl-titulo">Nobel de Física pela teoria da fusão nuclear estelar</p>
+      <p class="tl-autor">Hans Bethe</p>
+    </div>
+    <div class="timeline-item">
+      <p class="tl-ano">Séc. XX–XXI</p>
+      <p class="tl-titulo">Datação do Sistema Solar em 4,6 bilhões de anos</p>
+      <p class="tl-autor">Geocronologia moderna — meteoritos e rochas lunares</p>
+    </div>
+  </div>
+</section>
+
+<!-- RODAPÉ -->
+<footer>
+  <span class="footer-symbol">✦</span>
+  <p class="footer-nome">Da Poeira das Estrelas ao Ser Humano</p>
+  <p class="footer-nota">Artigo construído em diálogo entre a física nuclear, a Escritura e a filosofia da criação.<br>
+  <em>"Conhecimento é o combustível do maravilhamento." — Richard Feynman</em></p>
+  <div class="footer-autor-bloco">
+    <p class="footer-autor-nome">Pr. João Alves</p>
+    <p class="footer-autor-local">Vila Velha — ES</p>
+    <a class="footer-autor-link" href="https://www.radiomateus633.com" target="_blank" rel="noopener">www.radiomateus633.com</a>
+  </div>
+</footer>
+
+<!-- VOLTAR AO TOPO -->
+<button id="backTop" aria-label="Voltar ao topo" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<!-- TOOLTIP -->
+<div class="tag-tooltip" id="tagTooltip"></div>
+
+<script>
+// Progress bar
+const progressBar = document.getElementById('progressBar');
+window.addEventListener('scroll', () => {
+  const scrolled = window.scrollY;
+  const total = document.body.scrollHeight - window.innerHeight;
+  progressBar.style.width = (scrolled / total * 100) + '%';
+
+  // Back to top
+  document.getElementById('backTop').classList.toggle('visivel', scrolled > 400);
+});
+
+// Navigation scroll
+function irPara(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const navH = document.getElementById('mainNav').offsetHeight;
+  const top = el.getBoundingClientRect().top + window.scrollY - navH - 16;
+  window.scrollTo({ top, behavior: 'smooth' });
+}
+
+// Active nav highlight via IntersectionObserver
+const sections = document.querySelectorAll('.section');
+const navBtns = document.querySelectorAll('.nav-btn');
+
+const navObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const idx = entry.target.dataset.nav;
+      navBtns.forEach(b => b.classList.remove('ativo'));
+      const btn = document.querySelector(`.nav-btn[data-target="${idx}"]`);
+      if (btn) {
+        btn.classList.add('ativo');
+        btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      }
+    }
+  });
+}, { threshold: 0.3 });
+
+sections.forEach(s => navObserver.observe(s));
+
+// Section fade-in
+const fadeObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visivel');
+    }
+  });
+}, { threshold: 0.08 });
+
+sections.forEach(s => fadeObserver.observe(s));
+
+// Passos sequenciais
+const passoObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const passos = entry.target.querySelectorAll('.passo');
+      passos.forEach((p, i) => {
+        setTimeout(() => p.classList.add('visivel'), i * 180);
+      });
+    }
+  });
+}, { threshold: 0.08 });
+
+document.querySelectorAll('.passos').forEach(el => passoObserver.observe(el));
+
+// Timeline sequencial
+const tlObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const items = entry.target.querySelectorAll('.timeline-item');
+      items.forEach((item, i) => {
+        setTimeout(() => item.classList.add('visivel'), i * 120);
+      });
+    }
+  });
+}, { threshold: 0.08 });
+
+const tlLista = document.getElementById('tl-lista');
+if (tlLista) tlObserver.observe(tlLista);
+
+// Acordeão
+function toggleAcordeao(id) {
+  const item = document.getElementById(id);
+  const corpo = item.querySelector('.acordeao-corpo');
+  const inner = item.querySelector('.acordeao-corpo-inner');
+  const aberto = item.classList.contains('aberto');
+
+  // Fechar todos
+  document.querySelectorAll('.acordeao-item.aberto').forEach(a => {
+    a.classList.remove('aberto');
+    a.querySelector('.acordeao-corpo').style.maxHeight = '0';
+  });
+
+  if (!aberto) {
+    item.classList.add('aberto');
+    corpo.style.maxHeight = inner.scrollHeight + 32 + 'px';
+  }
+}
+
+// Tags tooltip
+const tooltip = document.getElementById('tagTooltip');
+document.querySelectorAll('.tag').forEach(tag => {
+  tag.addEventListener('mouseenter', (e) => {
+    const text = tag.dataset.tooltip;
+    if (!text) return;
+    tooltip.textContent = text;
+    tooltip.classList.add('visivel');
+  });
+
+  tag.addEventListener('mousemove', (e) => {
+    let x = e.clientX + 14;
+    let y = e.clientY - 10;
+    if (x + 290 > window.innerWidth) x = e.clientX - 300;
+    if (y + 80 > window.innerHeight) y = e.clientY - 80;
+    tooltip.style.left = x + 'px';
+    tooltip.style.top = y + 'px';
+  });
+
+  tag.addEventListener('mouseleave', () => {
+    tooltip.classList.remove('visivel');
+  });
+
+  tag.addEventListener('click', () => {
+    tag.classList.add('flash');
+    setTimeout(() => tag.classList.remove('flash'), 300);
+  });
+});
+</script>
+</body>
+</html>
